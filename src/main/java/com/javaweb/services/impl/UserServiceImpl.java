@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 	public UserModel get(String username) {
 		return userDao.get(username);
 	}
+
 	@Override
 	public void insert(UserModel user) {
 		userDao.insert(user);
@@ -49,5 +50,9 @@ public class UserServiceImpl implements UserService {
 	public boolean checkExistPhone(String phone) {
 		return userDao.checkExistPhone(phone);
 	}
-	
+
+	@Override
+	public boolean update(String username, String password) {
+		return userDao.update(username, password);
+	}
 }

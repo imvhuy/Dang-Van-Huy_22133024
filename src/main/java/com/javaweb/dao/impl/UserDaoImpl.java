@@ -142,5 +142,24 @@ public class UserDaoImpl extends DBConnectMySQL implements UserDao {
 			System.out.println(user);
 		}
 		}
+
+	@Override
+	public boolean update(String username, String password) {
+			boolean duplicate = false;
+			String query = "UPDATE users SET password = ? WHERE username = ?";
+			try {
+				conn = DBConnectMySQL.getConnection();
+				ps = conn.prepareStatement(query);
+				ps.setString(1, password);
+				ps.setString(2, username);
+				if (ps.executeUpdate() == 1) {
+					duplicate = true;
+				}
+				ps.close();
+				conn.close();
+			} catch (Exception ex) {
+			}
+			return duplicate;
+		}
 	}
 

@@ -20,13 +20,14 @@ public class DBConnectMySQL {
 		}
 		return null;
 	}
-
+	
 	public static void main(String[] args) {
 		try {
-			new DBConnectMySQL();
-			System.out.println(DBConnectMySQL.getConnection());
-		} catch (Exception e) {
-			e.printStackTrace();
+		new DBConnectMySQL();
+		System.out.println(DBConnectMySQL.getConnection());
+		}
+		catch(Exception e){
+		e.printStackTrace();
 		}
 	}
 }
