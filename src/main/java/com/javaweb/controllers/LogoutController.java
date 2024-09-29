@@ -23,28 +23,31 @@ public class LogoutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
-		if (session != null) {
-			session.invalidate();
-		}
-//        Cookie cookie = new Cookie(Constant.COOKIE_REMEMBER, "");
-//        cookie.setMaxAge(0);  // Xóa cookie bằng cách đặt thời gian sống là 0
-//        cookie.setPath("/"); 
-//        resp.addCookie(cookie);
-		Cookie[] cookies = req.getCookies();
-	    if (cookies != null) {
-	        for (Cookie cookie : cookies) {
-	            if (cookie.getName().equals("username")) {
-	                // Chỉ xóa cookie nếu người dùng không chọn "Remember Me"
-	                String rememberMeValue = cookie.getValue();
-	                if (rememberMeValue == null || rememberMeValue.equals("")) {
-	                    Cookie usernameCookie = new Cookie("username", "");
-	                    usernameCookie.setMaxAge(0); // Xóa cookie username
-	                    usernameCookie.setPath("/"); // Đảm bảo đường dẫn khớp
-	                    resp.addCookie(usernameCookie);
-	                }
-	            }
-	        }
-	    }
-	    resp.sendRedirect(req.getContextPath() + "/login");
+//		if (session != null) {
+//			session.invalidate();
+//		}
+////        Cookie cookie = new Cookie(Constant.COOKIE_REMEMBER, "");
+////        cookie.setMaxAge(0);  // Xóa cookie bằng cách đặt thời gian sống là 0
+////        cookie.setPath("/"); 
+////        resp.addCookie(cookie);
+//		Cookie[] cookies = req.getCookies();
+//	    if (cookies != null) {
+//	        for (Cookie cookie : cookies) {
+//	            if (cookie.getName().equals("username")) {
+//	                // Chỉ xóa cookie nếu người dùng không chọn "Remember Me"
+//	                String rememberMeValue = cookie.getValue();
+//	                if (rememberMeValue == null || rememberMeValue.equals("")) {
+//	                    Cookie usernameCookie = new Cookie("username", "");
+//	                    usernameCookie.setMaxAge(0); // Xóa cookie username
+//	                    usernameCookie.setPath("/"); // Đảm bảo đường dẫn khớp
+//	                    resp.addCookie(usernameCookie);
+//	                }
+//	            }
+//	        }
+//	    }
+//	    resp.sendRedirect(req.getContextPath() + "/login");
+		
+		session.removeAttribute("account");
+		resp.sendRedirect("home");
 	}
 }

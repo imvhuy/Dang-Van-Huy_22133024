@@ -1,6 +1,7 @@
 package com.javaweb.controllers;
 
 import java.io.IOException;
+import java.util.Date;
 
 import com.javaweb.models.UserModel;
 import com.javaweb.services.UserService;
@@ -51,7 +52,7 @@ public class LoginController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		boolean isRememberMe = req.getParameter("rememberMe") != null;
+		Boolean isRememberMe = "on".equals(req.getParameter("remember"));
 //		boolean isRememberMe = false;
 		String alertMsg = "";
 //		if("on".equals(isRememberMe)){
@@ -68,9 +69,12 @@ public class LoginController extends HttpServlet {
 		if (user != null) {
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
-			if(isRememberMe){
-				 saveRemeberMe(resp, username);
-				 }
+			if (isRememberMe) {
+				saveRemeberMe(resp, username);
+			} else {
+				deleteRememberMe(resp);
+			}
+
 			resp.sendRedirect(req.getContextPath() + "/waiting");
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không chính xác";
@@ -78,12 +82,19 @@ public class LoginController extends HttpServlet {
 			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
 		}
 	}
-	private void saveRemeberMe(HttpServletResponse response, String 
-			username){
-			 Cookie cookie = new Cookie(Constant.SESSION_USERNAME, username);
-			 cookie.setMaxAge(30);
-			 cookie.setPath("/");
-			 response.addCookie(cookie);
-			 }
+
+	private void saveRemeberMe(HttpServletResponse response, String username) {
+		Cookie cookie = new Cookie(Constant.SESSION_USERNAME, username);
+		cookie.setMaxAge(30);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+	}
+
+	private void deleteRememberMe(HttpServletResponse response) {
+		Cookie cookie = new Cookie("username", "");
+		cookie.setMaxAge(0); // Xóa cookie ngay lập tức
+		cookie.setPath("/");
+		response.addCookie(cookie);
+	}
 
 }

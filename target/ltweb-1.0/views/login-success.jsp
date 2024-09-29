@@ -45,7 +45,7 @@
 				<ul class="list-inline right-topbar pull-right">
 				 <li>
                         <button class="button" onclick="window.location.href='${pageContext.request.contextPath }/member/myaccount'">My account</button> |
-                        <button method= "post" class="button" onclick="window.location.href='${pageContext.request.contextPath }/login'">Logout</button>
+                        <button method= "get" class="button" onclick="window.location.href='${pageContext.request.contextPath }/logout'">Logout</button>
                     </li>	 
 				</ul>
 			</div>
