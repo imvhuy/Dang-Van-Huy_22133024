@@ -3,6 +3,16 @@
 	xmlns="https://jakarta.ee/xml/ns/jakartaee"
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	version="6.0">
+	<servlet>
+		<display-name>Waiting</display-name>
+		<servlet-name>Waiting</servlet-name>
+		<servlet-class>com.javaweb.controllers.WaitingController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Waiting</servlet-name>
+		<url-pattern></url-pattern>
+	</servlet-mapping>
+
 	<filter>
 		<filter-name>sitemesh</filter-name>
 		<filter-class>
@@ -15,5 +25,5 @@
 	</filter-mapping>
 	<session-config>
 		<tracking-mode>COOKIE</tracking-mode>
-	 </session-config>
+	</session-config>
 </web-app>
